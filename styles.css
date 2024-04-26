@@ -10,6 +10,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     background: #cb2d3e;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to left, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -17,15 +19,31 @@ body{
 header{
     text-align: center;
     color: whitesmoke;
+    font-size: 5vw;
+    width: 100%;
+    height: 20%;
 }
 #busquedad{
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     text-align: center;
+    align-items: center;
+}
+#entrada{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    min-height: 17px;
+    max-height: 50px; 
+
 }
 input{
     background-color: transparent;
     color: whitesmoke;
-    width: 30%;
+    width: 35%;
+    margin-right: 2px;
     border: 3px solid whitesmoke;
     border-radius: 4em;
     padding: 0.3em 0.3em;
@@ -36,29 +54,38 @@ input{
     color: rgba(180, 180, 180, 0.603);
     text-align: center;
 }
+#entrada img{
+    width: 2.9vw;
+    height: 2.9vw;
+}
+#entrada button{
+    width: 2.9vw;
+    height: 2.9vw;
+}
 button{
     background-color: transparent;
     cursor: pointer;
     color: whitesmoke;
 }
+button:active{
+    cursor: default;
+    transform: scale(0.9);
+}
 #filtros{
     border-bottom: 2px solid whitesmoke;
-    font-size: 1.2vw;
+    font-size: 1.3vw;
     font-weight: 600;
+    opacity: 1;
 }
 .opciones-filtro{
     border: 3px solid whitesmoke;
     padding: 1em 1em;
     border-radius: 3em;
+    font-size: 1.3vw;
     font-weight: 600;
-    display: none;
-}
-
-.mostrar{
-    display:inline;
-}
-.esconder{
-    display:none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    /*transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;*/
 }
 .activo{
     background-color: whitesmoke;

@@ -16,18 +16,18 @@
             <h1>Bienvenidos</h1>
         </header>
         <section id="busquedad">
-            <div>
-                <input type="text" placeholder="Ingrese el Nombre" id="barra">
-                <button id="lupa"><img src="imagenes/lupa.png" alt="Boton de Busquedad"></button>
+            <div id="entrada">
+                <input type="text" placeholder="Ingrese Nombre" id="barra" onkeypress="VerificacionEnter(event)">
+                <button id="lupa" onclick="buscar()"><img src="imagenes/lupa.png" alt="Boton de Busquedad"></button>
             </div>
-            <div id="menu-despegable">
+            <div id="boton-filtrado">
                 <button id="filtros">Filtros</button>
-                <div class="contenido-menu-despegable">
-                    <button class="opciones-filtro">Por Nombre</button>
-                    <button class="opciones-filtro">Por Ingrediente</button>
-                    <button class="opciones-filtro">Por Categoria</button>
-                    <button class="opciones-filtro">Por Area</button>
-                </div>
+            </div>
+            <div id="botones-filtros">
+                <button class="opciones-filtro" onclick="tipoFiltro(1);seleccionFiltro('Por Nombre')">Por Nombre</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(2);seleccionFiltro('Por Ingrediente')">Por Ingrediente</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(3);seleccionFiltro('Por Categoria')">Por Categoria</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(4);seleccionFiltro('Por Area')">Por Area</button>
             </div>
         </section>
     </body>
