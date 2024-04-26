@@ -1,0 +1,66 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: "Exo 2", sans-serif;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #cb2d3e;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+header{
+    text-align: center;
+    color: whitesmoke;
+}
+#busquedad{
+    align-items: center;
+    text-align: center;
+}
+input{
+    background-color: transparent;
+    color: whitesmoke;
+    width: 30%;
+    border: 3px solid whitesmoke;
+    border-radius: 4em;
+    padding: 0.3em 0.3em;
+    margin-bottom: 0.3vw;
+    font-size: 1.3vw;
+}
+::placeholder{
+    color: rgba(180, 180, 180, 0.603);
+    text-align: center;
+}
+button{
+    background-color: transparent;
+    cursor: pointer;
+    color: whitesmoke;
+}
+#filtros{
+    border-bottom: 2px solid whitesmoke;
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+.opciones-filtro{
+    border: 3px solid whitesmoke;
+    padding: 1em 1em;
+    border-radius: 3em;
+    font-weight: 600;
+    display: none;
+}
+
+.mostrar{
+    display:inline;
+}
+.esconder{
+    display:none;
+}
+.activo{
+    background-color: whitesmoke;
+    color: black;
+}
