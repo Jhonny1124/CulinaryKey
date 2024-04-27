@@ -7,19 +7,11 @@ async function getdata(url) {
       console.error(`fallo la consulta a la api: ${error}`);
     }
 }
-(async() => {
-  try{
-      const prueba = await getdata('http://www.themealdb.com/api/json/v1/1/search.php?s=Strawberries Romanoff');
-      console.log(prueba);
-      console.log(prueba[0].strArea);
-  }
-  catch(error){
-      console.error(`fallo la consulta a la api: ${error}`);
-  }
-})();
 const filtrado = document.getElementById("filtros");
 const opciones = document.getElementsByClassName("opciones-filtro");
+let matriz = document.createElement("div");
 let apiurl;
+let datos;
 function tipoFiltro(valor){
   switch(valor){
       case 1:
@@ -77,10 +69,64 @@ function VerificacionEnter(evento){
     buscar();
   }
 }
+function productos(datos){
+  matriz.innerHTML = "";
+  matriz.classList.add("productos");
+  for(let dato of datos){
+    
+    let tarjeta = document.createElement("a");
+    tarjeta.classList.add("tarjeta");
+
+    let nombre = document.createElement("p");
+    nombre.textContent = dato.strMeal;
+    nombre.classList.add("prueba");
+    console.log(nombre.length)
+
+    let imagen = document.createElement("img");
+    imagen.classList.add("imagen-tarjeta");
+    imagen.src = dato.strMealThumb;
+    imagen.alt = dato.strMeal
+
+    tarjeta.appendChild(imagen);
+    tarjeta.appendChild(nombre);
+
+    matriz.appendChild(tarjeta);
+  }
+  document.body.appendChild(matriz);
+}
 async function buscar(){
-  const entrada = document.getElementById("barra").value;
-  const prueba = await getdata(apiurl+entrada);
-  console.log(prueba)
+  const entrada = document.getElementById("barra");
+  if(entrada.value == "" || /^\s+$/.test(entrada.value) == true){
+    Swal.fire({
+      title: 'Error',
+      text: 'Por favor, ingresa un valor válido.',
+      icon: 'error',
+      confirmButtonText: 'OK'
+    });
+  }
+  else{
+    const url = apiurl+entrada.value;
+    try{
+      const respuesta = await getdata(url);
+      if(respuesta == null){
+        Swal.fire({
+          title: 'Sin resultados',
+          text: 'Lo sentimos, no se encontraron resultados para la búsqueda',
+          icon: 'info',
+          confirmButtonText: 'OK'
+        });
+      }
+      else{
+        datos = respuesta;
+        entrada.value = "";
+        console.log(datos)
+        productos(datos);
+      }
+    }
+    catch(error){
+      console.error(`fallo la consulta a la api: ${error}`);
+    }
+  }
 }
 window.onload = () =>{
   console.log("hola");

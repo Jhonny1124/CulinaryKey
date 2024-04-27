@@ -17,11 +17,25 @@ body{
     background: linear-gradient(to left, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     color: whitesmoke;
     font-size: 5vw;
+    margin-bottom: 10px;
     width: 100%;
     height: 20%;
+}
+#Inicio{
+    position: fixed;
+    margin-bottom: 6vw;
+    margin-right: 94vw;
+}
+#Inicio img,button{
+    min-width: 30px;
+    width: 4vw;
+    height: auto;
 }
 #busquedad{
     display: flex;
@@ -42,7 +56,10 @@ header{
 input{
     background-color: transparent;
     color: whitesmoke;
+    min-width: 259px;
+    min-height: 17px;
     width: 35%;
+    height: auto;
     margin-right: 2px;
     border: 3px solid whitesmoke;
     border-radius: 4em;
@@ -55,10 +72,16 @@ input{
     text-align: center;
 }
 #entrada img{
+    min-height: 23px;
+    min-width: 23px;
     width: 2.9vw;
     height: 2.9vw;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
 }
 #entrada button{
+    min-height: 23px;
+    min-width: 23px;
     width: 2.9vw;
     height: 2.9vw;
 }
@@ -77,11 +100,18 @@ button:active{
     font-weight: 600;
     opacity: 1;
 }
+#botones-filtros{
+    display: flex;
+    flex-direction: row;
+}
 .opciones-filtro{
+    min-width: 55px;
+    width: 30%;
+    height: auto;
     border: 3px solid whitesmoke;
     padding: 1em 1em;
     border-radius: 3em;
-    font-size: 1.3vw;
+    font-size: 1.2vw;
     font-weight: 600;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -90,4 +120,52 @@ button:active{
 .activo{
     background-color: whitesmoke;
     color: black;
+}
+@media screen and (max-width:780px) {
+    #filtros{
+        font-size: 10px;
+    }
+}
+@media screen and (max-width:840px) {
+    .opciones-filtro{
+        font-size: 9px;
+    }
+}
+.productos{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: auto auto auto;
+    column-gap: 1.5em;
+    row-gap: 1.5em;
+    padding: 2em 0;
+}
+.tarjeta{
+    position: relative;
+    max-width: 22em;
+    border-radius: 22px;
+    background-color:whitesmoke;
+    border: 5px solid whitesmoke;
+}
+.prueba{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    font-size: min(3vw, 33px);
+    font-weight:700;
+    color:black;
+}
+.imagen-tarjeta{
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    margin-bottom: -0.19vw;
+    opacity: 0.85;
+}
+@media screen and (max-width:880px) {
+    .prueba{
+        font-size: 2vw;
+    }
 }
