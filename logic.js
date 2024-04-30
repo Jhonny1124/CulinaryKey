@@ -118,6 +118,11 @@ function productos(datos) {//Funcion que crea tarjetas para los platos
   matriz.innerHTML = "";
   iniciopagina.innerHTML = "";
   PaginasMostradas.innerHTML = "";
+  let ResultadosEncontrados = document.createElement("h2");
+  ResultadosEncontrados.textContent = "Results found ("+datos.length+")";
+  ResultadosEncontrados.classList.add("encabezado2");
+
+  PaginasMostradas.appendChild(ResultadosEncontrados);
 
   // Determinar el número total de páginas
   const totalPaginas = Math.ceil(datos.length / 18);
@@ -374,6 +379,14 @@ async function info_producto(tarjeta){//Funcion que muestra toda la informacion 
     let IngredientesInstrucciones = document.createElement("div");
     IngredientesInstrucciones.classList.add("IngredientesInstrucciones");
 
+    let IngredientesPlato = document.createElement("div");
+
+    let EncabezadoIngredinetes = document.createElement("h2");
+    EncabezadoIngredinetes.textContent = "Ingredients";
+    EncabezadoIngredinetes.classList.add("encabezado2");
+
+    IngredientesPlato.appendChild(EncabezadoIngredinetes);
+
     let ingredientes = document.createElement("div");
     ingredientes.classList.add("IngredientesPlato");
     for(let i = 1; i <= 20; i++){
@@ -401,6 +414,8 @@ async function info_producto(tarjeta){//Funcion que muestra toda la informacion 
       }
     }
 
+    IngredientesPlato.appendChild(ingredientes);
+
     let Contenedor = document.createElement("div");
     
     let Encabezado = document.createElement("h2");
@@ -416,7 +431,7 @@ async function info_producto(tarjeta){//Funcion que muestra toda la informacion 
     Contenedor.appendChild(instrucciones);
 
     plato.appendChild(ImagenPlatoDisplay);
-    IngredientesInstrucciones.appendChild(ingredientes);
+    IngredientesInstrucciones.appendChild(IngredientesPlato);
     IngredientesInstrucciones.appendChild(Contenedor);
     plato.appendChild(IngredientesInstrucciones);
     contenido.appendChild(plato);

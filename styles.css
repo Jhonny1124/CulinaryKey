@@ -16,6 +16,16 @@ body{
     background: -webkit-linear-gradient(to left, #ef473a, #cb2d3e);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to left, #ef473a, #cb2d3e); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+#PiedePagina{
+    width: 100%;
+    text-align: center;
+    background-color:#ED213A;
+    color: whitesmoke;
+}
+#PiedePagina footer{
+    font-size: 1.5vw;
+    margin: 2vw;
+}
 header{
     display: flex;
     align-items: center;
@@ -34,7 +44,7 @@ header{
     margin-right: 94vw;
 }
 #Inicio img,button{
-    min-width: 30px;
+    min-width: 20px;
     width: 4vw;
     height: auto;
 }
@@ -151,6 +161,21 @@ button:active{
     column-gap: 0.7em;
     row-gap: 0.7em;
     padding: 2em 0;
+}
+@media screen and (max-width:950px) {
+    .IngredientesPlato{
+        grid-template-columns: auto auto auto auto ;
+    }
+}
+@media screen and (max-width:843px) {
+    .IngredientesPlato{
+        grid-template-columns: auto auto auto ;
+    }
+}
+@media screen and (max-width:710px) {
+    .IngredientesPlato{
+        grid-template-columns: auto auto ;
+    }
 }
 .IngredientesInstrucciones{
     display: grid;
