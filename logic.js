@@ -241,7 +241,7 @@ async function Inicio(){
   iniciopagina.appendChild(matrizpopulares);
   iniciopagina.appendChild(categorias);
   try{
-    let respuestacat = await axios.get("http://themealdb.com/api/json/v1/1/categories.php");
+    let respuestacat = await axios.get("http://www.themealdb.com/api/json/v1/1/categories.php");
     console.log(respuestacat.data.categories);
     for(let categoria of respuestacat.data.categories){
       let tarjeta = document.createElement("a");
