@@ -250,3 +250,10 @@ button:active{
     color: whitesmoke;
     font-size: 3vw;
 }
+.BotonPagina{
+    margin-bottom: 1vw;
+    font-size: min(1.6vw, 20px);
+    border: 1.5px solid whitesmoke;
+    margin: 0.1vw;
+    margin-bottom: 2vw;
+}

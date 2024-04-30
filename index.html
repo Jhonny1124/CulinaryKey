@@ -11,6 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="logic.js" async></script>
         <link rel="stylesheet" href="styles.css">
+        <link rel="icon" href="imagenes/chef.png" type="image/png" />
     </head>
     <body>
         <header>
@@ -23,13 +24,13 @@
                 <button id="lupa" onclick="buscar()"><img src="imagenes/lupa.png" alt="Boton de Busquedad"></button>
             </div>
             <div id="boton-filtrado">
-                <button id="filtros">Filtros</button>
+                <button id="filtros">Filters</button>
             </div>
             <div id="botones-filtros">
-                <button class="opciones-filtro" onclick="tipoFiltro(1);seleccionFiltro('Por Nombre')">Por Nombre</button>
-                <button class="opciones-filtro" onclick="tipoFiltro(2);seleccionFiltro('Por Ingrediente')">Por Ingrediente</button>
-                <button class="opciones-filtro" onclick="tipoFiltro(3);seleccionFiltro('Por Categoria')">Por Categoria</button>
-                <button class="opciones-filtro" onclick="tipoFiltro(4);seleccionFiltro('Por Area')">Por Area</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(1);seleccionFiltro('By Name')">By Name</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(2);seleccionFiltro('By Ingredient')">By Ingredient</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(3);seleccionFiltro('By Category')">By Category</button>
+                <button class="opciones-filtro" onclick="tipoFiltro(4);seleccionFiltro('By Area')">By Area</button>
             </div>
         </section>
         <section id="contenido"></section>

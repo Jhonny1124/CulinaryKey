@@ -17,6 +17,10 @@ const opciones = document.getElementsByClassName("opciones-filtro");
 let matriz = document.createElement("div");
 matriz.classList.add("productos");
 
+let PaginasMostradas = document.createElement("div");
+PaginasMostradas.style.justifyContent = "center";
+PaginasMostradas.style.textAlign = "center";
+
 let matrizcategorias = document.createElement("div");
 matrizcategorias.classList.add("productos");
 
@@ -96,7 +100,7 @@ function seleccionFiltro(significado){
           value.classList.add("activo");
           console.log(significado);
           let prueba = value.innerText.split(" ");
-          document.getElementById("barra").placeholder = "Ingrese "+prueba[prueba.length -1];
+          document.getElementById("barra").placeholder = "Enter "+prueba[prueba.length -1];
       }
       else{
           value.classList.remove("activo");
@@ -108,47 +112,77 @@ function VerificacionEnter(evento){
     buscar();
   }
 }
-function productos(datos){
+function productos(datos) {
   plato.innerHTML = "";
   matriz.innerHTML = "";
   iniciopagina.innerHTML = "";
-  for(let dato of datos){
-    
-    let tarjeta = document.createElement("a");
-    tarjeta.classList.add("tarjeta");
-    tarjeta.addEventListener("click", function(){
-      info_producto(tarjeta);
-    })
-    
 
-    let nombre= document.createElement("p");
-    nombre.textContent = dato.strMeal;
-    nombre.classList.add("prueba");
+  // Determinar el número total de páginas
+  const totalPaginas = Math.ceil(datos.length / 18);
 
-    let imagen = document.createElement("img");
-    imagen.classList.add("imagen-tarjeta");
-    imagen.src = dato.strMealThumb;
-    imagen.alt = dato.strMeal
+  // Función para mostrar una página específica
+  function mostrarPagina(pagina) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    matriz.innerHTML = ""; // Limpiar el contenido actual de la matriz
+    const inicio = pagina * 18;
+    const fin = Math.min(inicio + 18, datos.length);
 
-    tarjeta.addEventListener("mouseenter", function(){
-      nombre.style.fontSize = "min(3.5vw, 37px)";
-      nombre.style.transition = "font-size 0.4s ease"; 
-      imagen.style.opacity = "0.65";
-      imagen.style.transition = "opacity 0.4s ease"; 
-    })
-    tarjeta.addEventListener("mouseleave", function(){
-      nombre.style.fontSize = "min(3vw, 33px)";
-      nombre.style.transition = "font-size 0.4s ease"; 
-      imagen.style.opacity = "0.75";
-      imagen.style.transition = "opacity 0.4s ease"; 
-    })
+    for (let i = inicio; i < fin; i++) {
+      const dato = datos[i];
 
-    tarjeta.appendChild(imagen);
-    tarjeta.appendChild(nombre);
+      let tarjeta = document.createElement("a");
+      tarjeta.classList.add("tarjeta");
+      tarjeta.addEventListener("click", function(){
+        info_producto(tarjeta);
+      });
 
-    matriz.appendChild(tarjeta);
+      let nombre= document.createElement("p");
+      nombre.textContent = dato.strMeal;
+      nombre.classList.add("prueba");
+
+      let imagen = document.createElement("img");
+      imagen.classList.add("imagen-tarjeta");
+      imagen.src = dato.strMealThumb;
+      imagen.alt = dato.strMeal;
+
+      tarjeta.addEventListener("mouseenter", function(){
+        nombre.style.fontSize = "min(3.5vw, 37px)";
+        nombre.style.transition = "font-size 0.4s ease"; 
+        imagen.style.opacity = "0.65";
+        imagen.style.transition = "opacity 0.4s ease"; 
+      });
+      tarjeta.addEventListener("mouseleave", function(){
+        nombre.style.fontSize = "min(3vw, 33px)";
+        nombre.style.transition = "font-size 0.4s ease"; 
+        imagen.style.opacity = "0.75";
+        imagen.style.transition = "opacity 0.4s ease"; 
+      });
+
+      tarjeta.appendChild(imagen);
+      tarjeta.appendChild(nombre);
+
+      matriz.appendChild(tarjeta);
+    }
   }
-  contenido.appendChild(matriz);
+
+  // Mostrar la primera página al cargar
+  mostrarPagina(0);
+
+  // Agregar botones para navegar entre las páginas
+  PaginasMostradas.appendChild(matriz);
+  for (let i = 0; i < totalPaginas; i++) {
+    const boton = document.createElement("button");
+    boton.classList.add("BotonPagina");
+    boton.textContent = i + 1; // El índice de la página comienza desde 0
+    boton.addEventListener("click", function() {
+      mostrarPagina(i);
+    });
+    PaginasMostradas.appendChild(boton);
+  }
+  contenido.appendChild(PaginasMostradas);
 }
 async function Inicio(){
   window.scrollTo({
@@ -157,16 +191,16 @@ async function Inicio(){
   });
   
   plato.innerHTML = "";
-  matriz.innerHTML = "";
+  PaginasMostradas.innerHTML = "";
   matrizcategorias.innerHTML = "";
   matrizpopulares.innerHTML = "";
   iniciopagina.innerHTML = "";
 
   let ingredientespopu = document.createElement("h2");
-  ingredientespopu.textContent="Ingredientes Populares"
+  ingredientespopu.textContent="Popular Ingredients"
   ingredientespopu.classList.add("encabezado2");
   let categorias = document.createElement("h2");
-  categorias.textContent="Categorias"
+  categorias.textContent="Categories"
   categorias.classList.add("encabezado2")
 
   for(let dato of populares.data){
@@ -254,6 +288,7 @@ async function Inicio(){
 async function buscar(){
   const entrada = document.getElementById("barra");
   if(entrada.value == "" || /^\s+$/.test(entrada.value) == true){
+    entrada.value = "";
     Swal.fire({
       title: 'Error',
       text: 'Por favor, ingresa un valor válido.',
@@ -266,6 +301,7 @@ async function buscar(){
     try{
       const respuesta = await getdata(url);
       if(respuesta == null){
+        entrada.value = "";
         Swal.fire({
           title: 'Sin resultados',
           text: 'Lo sentimos, no se encontraron resultados para la búsqueda',
@@ -307,7 +343,11 @@ async function busquedad_categoria(tarjeta){
   }
 }
 async function info_producto(tarjeta){
-  matriz.innerHTML = "";
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+  PaginasMostradas.innerHTML = "";
   iniciopagina.innerHTML = "";
   busquedad.style.display = "none";
   let ImagenPlatoDisplay = document.createElement("div");
@@ -382,7 +422,7 @@ window.onload = () =>{
   Inicio();
   console.log("hola");
   tipoFiltro(1)
-  seleccionFiltro('Por Nombre')
+  seleccionFiltro('By Name')
   for(let value of opciones){
     value.style.opacity="0";
     value.style.visibility="hidden";
