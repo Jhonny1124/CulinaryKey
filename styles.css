@@ -29,6 +29,7 @@ header{
 }
 #Inicio{
     position: fixed;
+    z-index: 1000;
     margin-bottom: 6vw;
     margin-right: 94vw;
 }
@@ -141,6 +142,27 @@ button:active{
     row-gap: 1.5em;
     padding: 2em 0;
 }
+.IngredientesPlato{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: auto auto auto auto auto;
+    column-gap: 1em;
+    row-gap: 1em;
+    padding: 2em 0;
+}
+.IngredientesInstrucciones{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-template-columns: auto auto;
+    column-gap: 2em;
+    row-gap: 1.5em;
+    padding: 2em 0;
+    margin: 1em;
+}
 .productospopu{
     display: grid;
     justify-content: center;
@@ -154,15 +176,21 @@ button:active{
     position: relative;
     max-width: 22em;
     border-radius: 22px;
-    background-color:whitesmoke;
+    background: #ED213A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border: 5px solid whitesmoke;
+    cursor: pointer;
 }
 .tarjetapopu{
     position: relative;
     max-width: 18em;
     border-radius: 22px;
-    background-color:whitesmoke;
+    background: #ED213A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     border: 5px solid whitesmoke;
+    cursor: pointer;
 }
 .prueba{
     position: absolute; 
@@ -171,14 +199,42 @@ button:active{
     transform: translate(-50%, -50%);
     font-size: min(3vw, 33px);
     font-weight:700;
-    color:black;
+    color:whitesmoke;
+}
+.Instrucciones{
+    text-align: center;
+    font-weight: 600;
+    color: whitesmoke;
+}
+.NombreIngrediente{
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    font-size: min(2vw, 20px);
+    font-weight:700;
+    color:whitesmoke;
 }
 .imagen-tarjeta{
     width: 100%;
     height: 100%;
     border-radius: 20px;
     margin-bottom: -0.19vw;
-    opacity: 0.85;
+    opacity: 0.75;
+}
+.ImagenPlatoDislay{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.ImagenPlato{
+    max-width:450px;
+    min-width: 200px;
+    width: 35vw;
+    height: auto;
+    border-radius: 20px;
 }
 @media screen and (max-width:880px) {
     .prueba{
