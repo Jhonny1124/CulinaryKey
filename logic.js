@@ -1,4 +1,5 @@
 async function getdata(url) {
+  //Funcion para consultar la API
     try {
       const response = await axios.get(url);
       const data = response.data;
@@ -8,26 +9,26 @@ async function getdata(url) {
     }
 }
 
-const contenido = document.getElementById("contenido");
+const contenido = document.getElementById("contenido"); //contenido dinamico de la pagina
 
 const busquedad = document.getElementById("busquedad");
 const filtrado = document.getElementById("filtros");
 const opciones = document.getElementsByClassName("opciones-filtro");
 
-let matriz = document.createElement("div");
+let matriz = document.createElement("div"); //Tarjetas de los platos con imagen y nombre
 matriz.classList.add("productos");
 
-let PaginasMostradas = document.createElement("div");
+let PaginasMostradas = document.createElement("div"); //Pagina que muestra 18 elementos por busquedad
 PaginasMostradas.style.justifyContent = "center";
 PaginasMostradas.style.textAlign = "center";
 
-let matrizcategorias = document.createElement("div");
+let matrizcategorias = document.createElement("div");//Categorias de busquedad
 matrizcategorias.classList.add("productos");
 
-let matrizpopulares = document.createElement("div");
+let matrizpopulares = document.createElement("div");//Ingredientes mas populares
 matrizpopulares.classList.add("productospopu");
 
-let iniciopagina = document.createElement("div");
+let iniciopagina = document.createElement("div");//Mostrar ingredientes populares y categorias al incio de la pagina
 
 let plato = document.createElement("div");
 
@@ -35,7 +36,7 @@ let apiurl;
 let datos;
 let nombre_plato;
 
-let populares = {
+let populares = { //Lista de ingredientes populares
   data: [
     {
         nombre:"Chicken",
@@ -55,7 +56,7 @@ let populares = {
     },
   ],
 };
-function tipoFiltro(valor){
+function tipoFiltro(valor){//Funcion que determina los links dpendiendo del tipo de busquedad
   switch(valor){
       case 1:
           apiurl = "https://themealdb.com/api/json/v1/1/search.php?s=";
@@ -70,8 +71,8 @@ function tipoFiltro(valor){
           apiurl = "https://themealdb.com/api/json/v1/1/filter.php?a=";
           break;
   }
-  console.log(valor)
 };
+//Eventos que permiten un menu dinamico que muestra los filtros de busquedad
 filtrado.addEventListener("click",function(){
   filtrado.style.transition = "opacity 1s ease-in-out";
   filtrado.style.opacity = "0";
@@ -94,7 +95,7 @@ for(let opcion of opciones){
       }
     });
 }
-function seleccionFiltro(significado){
+function seleccionFiltro(significado){//funcion que deja señalado el fltro que se va a utilizar
   for(let value of opciones){
       if(significado.toUpperCase() == value.innerText.toUpperCase()){
           value.classList.add("activo");
@@ -107,15 +108,16 @@ function seleccionFiltro(significado){
       }
   }
 }
-function VerificacionEnter(evento){
+function VerificacionEnter(evento){//Funcion que permite hacer busquedad con enter
   if(evento.keyCode === 13){
     buscar();
   }
 }
-function productos(datos) {
+function productos(datos) {//Funcion que crea tarjetas para los platos
   plato.innerHTML = "";
   matriz.innerHTML = "";
   iniciopagina.innerHTML = "";
+  PaginasMostradas.innerHTML = "";
 
   // Determinar el número total de páginas
   const totalPaginas = Math.ceil(datos.length / 18);
@@ -184,7 +186,7 @@ function productos(datos) {
   }
   contenido.appendChild(PaginasMostradas);
 }
-async function Inicio(){
+async function Inicio(){//Funcion que crea el inicio de la pagina con los ingredientes populares y las categorias
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
@@ -242,7 +244,6 @@ async function Inicio(){
   iniciopagina.appendChild(categorias);
   try{
     let respuestacat = await axios.get("https://www.themealdb.com/api/json/v1/1/categories.php");
-    console.log(respuestacat.data.categories);
     for(let categoria of respuestacat.data.categories){
       let tarjeta = document.createElement("a");
       tarjeta.classList.add("tarjeta");
@@ -285,7 +286,7 @@ async function Inicio(){
   contenido.appendChild(iniciopagina);
   busquedad.style.display = "flex";
 }
-async function buscar(){
+async function buscar(){//Funcion que evalua si la busquedad esta correcta y la ejecuta
   const entrada = document.getElementById("barra");
   if(entrada.value == "" || /^\s+$/.test(entrada.value) == true){
     entrada.value = "";
@@ -311,7 +312,6 @@ async function buscar(){
       }
       else{
         entrada.value = "";
-        console.log(datos)
         productos(respuesta);
       }
     }
@@ -320,7 +320,7 @@ async function buscar(){
     }
   }
 }
-async function busquedad_ingredientes(tarjeta){
+async function busquedad_ingredientes(tarjeta){//Funcion que hace busquedad por Ingredientes Populares
   const ingrediente = tarjeta.querySelector("p").textContent;
   const url = "https://themealdb.com/api/json/v1/1/filter.php?i="+ingrediente;
   try{
@@ -331,7 +331,7 @@ async function busquedad_ingredientes(tarjeta){
     console.error(`fallo la consulta a la api: ${error}`);
   }
 }
-async function busquedad_categoria(tarjeta){
+async function busquedad_categoria(tarjeta){//Funcion que hace busquedad por cotegoria
   const ingrediente = tarjeta.querySelector("p").textContent;
   const url = "https://themealdb.com/api/json/v1/1/filter.php?c="+ingrediente;
   try{
@@ -342,7 +342,7 @@ async function busquedad_categoria(tarjeta){
     console.error(`fallo la consulta a la api: ${error}`);
   }
 }
-async function info_producto(tarjeta){
+async function info_producto(tarjeta){//Funcion que muestra toda la informacion del plato (Imagen, Nombre, Ingredientes y Instrucciones)
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
@@ -361,11 +361,8 @@ async function info_producto(tarjeta){
 
   ImagenPlatoDisplay.appendChild(NombrePlato);
 
-  console.log(url)
   try{
     const respuesta = await getdata(url);
-
-    console.log(respuesta)
 
     let imagen = document.createElement("img");
     imagen.classList.add("ImagenPlato");
@@ -404,12 +401,23 @@ async function info_producto(tarjeta){
       }
     }
 
+    let Contenedor = document.createElement("div");
+    
+    let Encabezado = document.createElement("h2");
+    Encabezado.textContent = "Instructions";
+    Encabezado.classList.add("encabezado2");
+
+    Contenedor.appendChild(Encabezado);
+
     let instrucciones = document.createElement("p");
     instrucciones.classList.add("Instrucciones");
     instrucciones.textContent = respuesta[0].strInstructions;
+
+    Contenedor.appendChild(instrucciones);
+
     plato.appendChild(ImagenPlatoDisplay);
     IngredientesInstrucciones.appendChild(ingredientes);
-    IngredientesInstrucciones.appendChild(instrucciones);
+    IngredientesInstrucciones.appendChild(Contenedor);
     plato.appendChild(IngredientesInstrucciones);
     contenido.appendChild(plato);
     
@@ -418,9 +426,8 @@ async function info_producto(tarjeta){
     console.error(`fallo la consulta a la api: ${error}`);
   }
 }
-window.onload = () =>{
+window.onload = () =>{//Funcion que inicializa la pagina
   Inicio();
-  console.log("hola");
   tipoFiltro(1)
   seleccionFiltro('By Name')
   for(let value of opciones){

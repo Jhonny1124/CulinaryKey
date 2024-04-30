@@ -148,8 +148,8 @@ button:active{
     align-items: center;
     text-align: center;
     grid-template-columns: auto auto auto auto auto;
-    column-gap: 1em;
-    row-gap: 1em;
+    column-gap: 0.7em;
+    row-gap: 0.7em;
     padding: 2em 0;
 }
 .IngredientesInstrucciones{
@@ -205,13 +205,18 @@ button:active{
     text-align: center;
     font-weight: 600;
     color: whitesmoke;
+    background: #ED213A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #93291E, #ED213A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #93291E, #ED213A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 10px;
+    margin: 1vw;
 }
 .NombreIngrediente{
     position: absolute; 
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%);
-    font-size: min(2vw, 20px);
+    font-size: min(2vw, 18px);
     font-weight:700;
     color:whitesmoke;
 }
