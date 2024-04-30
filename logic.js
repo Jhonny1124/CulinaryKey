@@ -58,16 +58,16 @@ let populares = {
 function tipoFiltro(valor){
   switch(valor){
       case 1:
-          apiurl = "http://themealdb.com/api/json/v1/1/search.php?s=";
+          apiurl = "https://themealdb.com/api/json/v1/1/search.php?s=";
           break;
       case 2:
-          apiurl = "http://themealdb.com/api/json/v1/1/filter.php?i=";
+          apiurl = "https://themealdb.com/api/json/v1/1/filter.php?i=";
           break;
       case 3:
-          apiurl = "http://themealdb.com/api/json/v1/1/filter.php?c=";
+          apiurl = "https://themealdb.com/api/json/v1/1/filter.php?c=";
           break;
       case 4:
-          apiurl = "http://themealdb.com/api/json/v1/1/filter.php?a=";
+          apiurl = "https://themealdb.com/api/json/v1/1/filter.php?a=";
           break;
   }
   console.log(valor)
@@ -322,7 +322,7 @@ async function buscar(){
 }
 async function busquedad_ingredientes(tarjeta){
   const ingrediente = tarjeta.querySelector("p").textContent;
-  const url = "http://themealdb.com/api/json/v1/1/filter.php?i="+ingrediente;
+  const url = "https://themealdb.com/api/json/v1/1/filter.php?i="+ingrediente;
   try{
     const respuesta = await getdata(url);
     productos(respuesta);
@@ -333,7 +333,7 @@ async function busquedad_ingredientes(tarjeta){
 }
 async function busquedad_categoria(tarjeta){
   const ingrediente = tarjeta.querySelector("p").textContent;
-  const url = "http://themealdb.com/api/json/v1/1/filter.php?c="+ingrediente;
+  const url = "https://themealdb.com/api/json/v1/1/filter.php?c="+ingrediente;
   try{
     const respuesta = await getdata(url);
     productos(respuesta);
@@ -357,7 +357,7 @@ async function info_producto(tarjeta){
   NombrePlato.textContent = tarjeta.querySelector("p").textContent;
   NombrePlato.classList.add("encabezado2")
 
-  const url = "http://themealdb.com/api/json/v1/1/search.php?s="+NombrePlato.textContent;
+  const url = "https://themealdb.com/api/json/v1/1/search.php?s="+NombrePlato.textContent;
 
   ImagenPlatoDisplay.appendChild(NombrePlato);
 
